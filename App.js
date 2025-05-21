@@ -27,7 +27,7 @@ function TabNavigator() {
 
           return <MaterialIcons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'blue',
+        tabBarActiveTintColor: '#7E5A9B',
         tabBarInactiveTintColor: 'gray',
       })}
     >

@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
         onChangeText={setQuery}
         style={styles.input}
       />
-      <Button mode="contained" onPress={searchShows} style={styles.button}>
+      <Button mode="contained" onPress={searchShows} style={styles.button} buttonColor='#FF71CE'>
         Buscar
       </Button>
 
@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 10 },
-  input: { height: 40, borderColor: 'blue', borderWidth: 1, borderRadius: 10, marginBottom: 10, padding: 10 },
+  input: { height: 40, borderColor: '#7E5A9B', borderWidth: 1, borderRadius: 10, marginBottom: 10, padding: 10 },
   button: { marginBottom: 10 },
   card: { marginBottom: 10 },
 });

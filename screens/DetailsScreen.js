@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Card, Title, Paragraph, Button, Portal, Dialog } from 'react-native-paper';
+import { Card, Title, Paragraph, Button } from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DetailsScreen = ({ route }) => {
   const { id } = route.params;
   const [show, setShow] = useState(null);
-  const [dialogVisible, setDialogVisible] = useState(false);
 
   useEffect(() => {
     const fetchShowDetails = async () => {
@@ -27,8 +26,7 @@ const DetailsScreen = ({ route }) => {
       const favorites = JSON.parse(existingFavorites);
       favorites.push(show);
       await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
-
-      setDialogVisible(true); // Abre o Dialog
+      alert('Série adicionada aos favoritos!');
     } catch (error) {
       console.error(error);
     }
@@ -46,25 +44,12 @@ const DetailsScreen = ({ route }) => {
           <Title>{show.name}</Title>
           <Paragraph>Gêneros: {show.genres.join(', ')}</Paragraph>
           <Paragraph>Estreia: {show.premiered}</Paragraph>
-          <Paragraph>Descrição: {show.summary.replace(/<[^>]*>?/gm, '')}</Paragraph>
+          <Paragraph>{show.summary.replace(/<[^>]*>?/gm, '')}</Paragraph>
         </Card.Content>
         <Card.Actions>
           <Button onPress={addToFavorites}>Adicionar aos Favoritos</Button>
         </Card.Actions>
       </Card>
-
-      {/* Modal de alerta moderno */}
-      <Portal>
-        <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
-          <Dialog.Title>Sucesso!</Dialog.Title>
-          <Dialog.Content>
-            <Paragraph>Série adicionada aos favoritos!</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={() => setDialogVisible(false)}>OK</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
     </ScrollView>
   );
 };
